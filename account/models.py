@@ -2,9 +2,6 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from app.models import Department
-
-
 # Create your models here.
 
 
@@ -35,6 +32,15 @@ class UserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=100)
+    budget = models.IntegerField()
+    desc = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 
 class CustomUser(AbstractUser):
